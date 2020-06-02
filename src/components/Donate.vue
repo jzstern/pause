@@ -15,15 +15,17 @@
     <div class="donate-action">
       <span class="donate-input-dollar-symbol">
         <input
+          v-model="donationAmountUSD"
           class="donate-input"
           type="number"
           max="100000"
+          placeholder="0.00"
           autocomplete="off"
           autocorrect="off"
           spellcheck="true"
         />
       </span>
-      <DonateButton />
+      <DonateButton :amount="donationAmountETH" />
     </div>
   </div>
 </template>
@@ -33,13 +35,19 @@ import DonateButton from "./DonateButton";
 export default {
   name: "Donate",
   components: {
-    DonateButton
+    DonateButton,
+  },
+  computed: {
+    donationAmountETH() {
+      return this.donationAmountUSD / 200;
+    },
   },
   data() {
     return {
-      isMobile: false
+      donationAmountUSD: null,
+      isMobile: false,
     };
-  }
+  },
 };
 </script>
 
