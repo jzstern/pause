@@ -5,80 +5,126 @@
 </template>
 
 <script>
-// import { ethers, utils } from "ethers";
-// const providers = require("ethers").providers;
+/*eslint-disable */
+let ethereum;
+import Web3 from "web3";
 
 export default {
   name: "DonateButton",
   props: {
     amount: {
-      type: Number
-    }
+      type: Number,
+    },
   },
   data() {
     return {
-      provider: null
+      balance: null,
+      network: null,
+      provider: null,
     };
   },
   methods: {
     donate() {
-      console.log("donating: " + this.amount);
-      // if (this.provider) {
-      //   console.log("donating");
-      // } else {
-      //   alert(
-      //     "you must connect an Ethereum wallet in order to donate through loft"
-      //   );
-      // }
+      if (this.amount == 0) alert("can't tip 0 homie");
+      else if (!this.provider) this.login();
+      else if (this.balance <= this.amount) alert("insufficient funds");
+      else {
+        const sendValue = web3.utils.toWei(
+          this.amount.toFixed(8).toString(),
+          "ether"
+        );
+
+        web3.eth.getAccounts((error, accounts) => {
+          if (error) throw error;
+          else if (accounts.length === 0) {
+            this.login();
+          } else {
+            const txnParams = {
+              from: accounts[0],
+              to: "0xDd538141f00B6A3ee3b2BF6B14d64d026A533A18",
+              value: sendValue,
+            };
+
+            web3.eth.sendTransaction(txnParams, async (error, txnHash) => {
+              this.$emit("txSent");
+              if (error) {
+                console.error();
+              } else {
+                console.log("Transaction Hash: " + txnHash);
+                this.$emit("txState", "pending");
+
+                let receipt = null;
+                try {
+                  receipt = await this.getTransactionReceipt(txnHash);
+                  this.$emit("txState", "confirmed");
+                } catch (e) {
+                  console.error(e);
+                  this.$emit("txState", null);
+                }
+
+                if (receipt && this.network === "main") {
+                  alert("thank you for supporting this important movement <3");
+                }
+              }
+            });
+          }
+        });
+      }
     },
     async getBalance() {
-      // try {
-      //   const wei = await web3.eth.getBalance(this.listener.walletAddress);
-      //   const listenerBalanceETH = Number.parseFloat(
-      //     web3.utils.fromWei(wei, "ether")
-      //   );
-      //   store.commit("setListener", {
-      //     ...this.listener,
-      //     balanceETH: listenerBalanceETH,
-      //   });
-      // } catch (error) {
-      //   console.error(error);
-      // }
+      try {
+        const wei = await web3.eth.getBalance(this.senderAddress);
+        this.balance = Number.parseFloat(web3.utils.fromWei(wei, "ether"));
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    getTransactionReceipt: async function(hash) {
+      let receipt = null;
+
+      while (receipt === null) {
+        receipt = await this.getTransactionReceiptPromise(hash);
+        setTimeout("", 1000);
+      }
+
+      return receipt;
+    },
+    getTransactionReceiptPromise(hash) {
+      return new Promise((resolve, reject) => {
+        web3.eth.getTransactionReceipt(hash, function(err, data) {
+          if (err !== null) reject(err);
+          else resolve(data);
+        });
+      });
     },
     async getWalletInfo() {
       if (this.provider) {
-        // let network = await web3.eth.net.getNetworkType();
-        // if (network !== "none") {
-        //   store.commit("setNetwork", network);
-        //   let accounts = [];
-        //   try {
-        //     accounts = await web3.eth.getAccounts();
-        //   } catch (e) {
-        //     console.error(e);
-        //   }
-        //   if (accounts.length === 0) console.warn("MetaMask is locked");
-        //   else {
-        //     store.commit("setTransactionState", "none");
-        //     store.commit("setListener", {
-        //       ...this.listener,
-        //       loggedIn: true,
-        //       walletAddress: accounts[0],
-        //     });
-        //     this.getUserId();
-        //     this.getBalance();
-        //     ethereum.on("accountsChanged", (accounts) => {
-        //       store.commit("setListener", {
-        //         ...this.listener,
-        //         walletAddress: accounts[0],
-        //       });
-        //       this.getUserId();
-        //       this.getBalance();
-        //     });
-        //     ethereum.on("networkChanged", function(accounts) {
-        //       document.location.reload();
-        //     });
-        //   }
-        // }
+        let network = await web3.eth.net.getNetworkType();
+        if (network !== "none") {
+          this.network = network;
+          let accounts = [];
+
+          try {
+            accounts = await web3.eth.getAccounts();
+          } catch (e) {
+            console.error(e);
+          }
+          if (accounts.length === 0) console.warn("MetaMask is locked");
+          else {
+            this.senderAddress = accounts[0];
+            this.getBalance();
+
+            if (ethereum) {
+              ethereum.on("accountsChanged", function(accounts) {
+                // ! this isn't being detected
+                this.getBalance();
+              });
+              ethereum.on("networkChanged", function(accounts) {
+                document.location.reload();
+              });
+            }
+          }
+        }
       }
     },
     getWeb3Provider() {
@@ -86,102 +132,28 @@ export default {
         typeof window.ethereum !== "undefined" ||
         typeof window.web3 !== "undefined"
       ) {
-        // window.web3 = new Web3(
-        //   window["ethereum"] || window.web3.currentProvider
-        // );
+        window.web3 = new Web3(
+          window["ethereum"] || window.web3.currentProvider
+        );
         // ethereum.autoRefreshOnNetworkChange = false;
-        return "MetaMask";
-      } else return "none";
+        this.provider = "exists";
+      }
     },
     async login() {
-      // await web3.currentProvider.enable(); // Prompt the user to connect their web3 wallet
+      await web3.currentProvider.enable();
+      // await ethereum.enable();
       await this.getWalletInfo();
     },
-    async sendDonation() {
-      // const sendValue = web3.utils.toWei(
-      //   this.tip.amountETH.toFixed(8).toString(),
-      //   "ether"
-      // );
-      // if (!this.provider) {
-      //   store.commit("showToastMessage", "tipping");
-      //   store.commit("setTip", { ...this.tip, amountUSD: 0.25 });
-      //   this.login();
-      // } else {
-      //   web3.eth.getAccounts((error, accounts) => {
-      //     if (error) throw error;
-      //     else if (accounts.length === 0) {
-      //       store.commit("resetToastMessage");
-      //       store.commit("setTip", { ...this.tip, amountUSD: 0.25 });
-      //       this.login();
-      //       return;
-      //     } else {
-      //       const txnParams = {
-      //         from: accounts[0],
-      //         to: this.tip.artistWalletAddress,
-      //         value: sendValue,
-      //       };
-      //       web3.eth.sendTransaction(txnParams, async (error, txnHash) => {
-      //         if (error) {
-      //           // TODO ; detect user rejection vs network error
-      //           if (!this.pendingTips.length) {
-      //             store.commit("setTransactionState", "failed");
-      //           }
-      //           store.commit("resetToastMessage");
-      //           store.commit("setTip", { ...this.tip, amountUSD: 0.25 });
-      //         } else {
-      //           console.log("Transaction Hash: " + txnHash);
-      //           const tip = { ...this.tip, hash: txnHash };
-      //           store.commit("resetToastMessage");
-      //           store.commit("addPendingTip", tip);
-      //           store.commit("setTransactionState", "pending");
-      //           store.commit("setTip", { ...this.tip, amountUSD: 0.25 });
-      //           let receipt = null;
-      //           try {
-      //             receipt = await this.getTransactionReceipt(txnHash);
-      //           } catch (e) {
-      //             console.error(e);
-      //           }
-      //           if (receipt) {
-      //             // TODO - confirm which TX's actually went through
-      //             if (this.network === "main") {
-      //               this.createTip(tip);
-      //               store.commit("setListener", {
-      //                 ...this.listener,
-      //                 numTips: ++this.listener.numTips,
-      //               });
-      //             }
-      //             store.commit("removePendingTip"); // TODO - remove the tip by ID, not order
-      //             store.commit("setTransactionState", "confirmed");
-      //             this.$refs.StationBackground.tipConfirmed();
-      //           }
-      //         }
-      //       });
-      //     }
-      //   });
-      // }
-    }
   },
-  mounted() {
-    // let ethereum = window.ethereum;
-    // if (typeof web3 !== "undefined") {
-    //   var web3Provider = new providers.Web3Provider(
-    //     web3.currentProvider,
-    //     ethers.providers.networks.ropsten
-    //   );
-    //   web3Provider.getBalance("..some address..").then(function(balance) {
-    //     var etherString = ethers.utils.formatEther(balance);
-    //     console.log("Balance: " + etherString);
-    //   });
-    // }
-    // var web3Provider = new providers.Web3Provider(web3.currentProvider, network);
-  }
+  async mounted() {
+    this.getWeb3Provider();
+    this.getWalletInfo();
+  },
 };
 </script>
 
 <style scoped lang="scss">
 .donate-button {
-  // @extend %non-selectable;
-  // @extend %quick-ease;
   cursor: pointer;
   background: #ffcb20;
   height: 60px;
@@ -197,7 +169,6 @@ export default {
 
   margin-left: 15px;
 
-  // font-variant: small-caps;
   display: flex;
   flex-direction: column;
   justify-content: center;

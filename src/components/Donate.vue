@@ -3,7 +3,7 @@
     <h2>donate using crypto</h2>
 
     <div class="donate-total-container">
-      <p class="donate-total">$500.00</p>
+      <p class="donate-total">${{ totalDonationsUSD }}</p>
       <p class="donate-total-label">total amount donated</p>
     </div>
     <p class="copy">
@@ -13,10 +13,9 @@
       <br />
     </p>
     <div class="donate-action">
-      <!-- <span class="donate-input-dollar-symbol"> -->
       <currency-input
         class="donate-input"
-        v-model="donationAmountUSD"
+        v-model="amountUSD"
         currency="USD"
         locale="en-US"
         placeholder="$0.00"
@@ -26,7 +25,12 @@
         onfocus="this.placeholder = ''"
         onblur="this.placeholder = '$0.00'"
       />
-      <DonateButton :amount="donationAmountETH" />
+
+      <DonateButton
+        :amount="amountETH"
+        @txSent="amountUSD = 0"
+        @txState="updateTxState"
+      />
     </div>
     <div class="tx-state">
       <div class="tx-pending">
@@ -67,21 +71,46 @@
 
 <script>
 import DonateButton from "./DonateButton";
+const CoinGecko = require("coingecko-api");
+const CoinGeckoClient = new CoinGecko();
+
 export default {
   name: "Donate",
   components: {
     DonateButton,
   },
   computed: {
-    donationAmountETH() {
-      return this.donationAmountUSD / 200;
+    amountETH() {
+      return this.amountUSD / this.ethPrice;
+    },
+    totalDonationsUSD() {
+      const totalDonationsETH = this.totalDonationsETH;
+      return (totalDonationsETH * this.ethPrice).toFixed(2);
     },
   },
   data() {
     return {
-      donationAmountUSD: null,
+      amountUSD: null,
+      ethPrice: null,
       isMobile: false,
+      totalDonationsETH: 1.2,
     };
+  },
+  methods: {
+    async getETHPrice() {
+      let ethQuery = await CoinGeckoClient.simple.price({
+        ids: ["ethereum"],
+        vs_currencies: ["usd"],
+      });
+
+      return ethQuery.data.ethereum.usd;
+    },
+    updateTxState(event) {
+      console.log(event);
+    },
+  },
+  async created() {
+    this.ethPrice = await this.getETHPrice();
   },
 };
 </script>
