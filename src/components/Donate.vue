@@ -7,8 +7,8 @@
       <p class="donate-total-label">total contributions</p>
     </div>
     <p class="copy">
-      Donations are sent to our wallet and will be split equally amongst
-      the Center for Policing Equity, Equal Justice Initiative, and the ACLU. We
+      Donations are sent to our wallet and will be split equally amongst the
+      Center for Policing Equity, Equal Justice Initiative, and the ACLU. We
       currently accept donations in ETH.
       <br />
     </p>
@@ -112,7 +112,7 @@ export default {
         )
         .then((response) => {
           if (response.status == "200") {
-            this.totalDonationsETH = web3.utils.fromWei(
+            this.totalDonationsETH = Web3.utils.fromWei(
               response.data.result,
               "ether"
             );
