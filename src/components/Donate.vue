@@ -15,7 +15,7 @@
     <div class="donate-action">
       <span class="donate-input-dollar-symbol">
         <input
-          v-model="donationAmountUSD"
+          v-model="amountUSD"
           class="donate-input"
           type="number"
           max="100000"
@@ -25,23 +25,46 @@
           spellcheck="true"
         />
       </span>
-      <DonateButton :amount="Number(donationAmountUSD)" />
+      <DonateButton :amount="amountETH" />
     </div>
   </div>
 </template>
 
 <script>
 import DonateButton from "./DonateButton";
+const CoinGecko = require("coingecko-api");
+const CoinGeckoClient = new CoinGecko();
+
 export default {
   name: "Donate",
   components: {
     DonateButton,
   },
+  computed: {
+    amountETH() {
+      return this.amountUSD / this.ethPrice;
+    },
+  },
   data() {
     return {
-      donationAmountUSD: null,
+      amountUSD: null,
+      ethPrice: null,
       isMobile: false,
     };
+  },
+  methods: {
+    async getETHPrice() {
+      let ethQuery = await CoinGeckoClient.simple.price({
+        ids: ["ethereum"],
+        vs_currencies: ["usd"],
+      });
+
+      return ethQuery.data.ethereum.usd;
+    },
+  },
+  async mounted() {
+    this.ethPrice = await this.getETHPrice();
+    console.log(this.ethPrice);
   },
 };
 </script>

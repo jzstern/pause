@@ -8,8 +8,6 @@
 // import { ethers, utils } from "ethers";
 // const providers = require("ethers").providers;
 import Web3 from "web3";
-const CoinGecko = require("coingecko-api");
-const CoinGeckoClient = new CoinGecko();
 
 export default {
   name: "DonateButton",
@@ -18,21 +16,15 @@ export default {
       type: Number,
     },
   },
-  computed: {
-    amountETH() {
-      return this.amount / this.ethPrice;
-    },
-  },
   data() {
     return {
-      ethPrice: null,
       network: null,
       provider: null,
     };
   },
   methods: {
     donate() {
-      console.log("donating: " + this.amountETH);
+      console.log("donating: " + this.amount);
       // if (this.provider) {
       //   console.log("donating");
       // } else {
@@ -54,14 +46,6 @@ export default {
       // } catch (error) {
       //   console.error(error);
       // }
-    },
-    async getETHPrice() {
-      let ethQuery = await CoinGeckoClient.simple.price({
-        ids: ["ethereum"],
-        vs_currencies: ["usd"],
-      });
-
-      return ethQuery.data.ethereum.usd;
     },
     async getWalletInfo() {
       if (this.provider) {
@@ -181,8 +165,6 @@ export default {
   },
   async mounted() {
     // this.getWalletInfo();
-    this.ethPrice = await this.getETHPrice();
-    console.log(this.ethPrice);
     // let ethereum = window.ethereum;
     // if (typeof web3 !== "undefined") {
     //   var web3Provider = new providers.Web3Provider(
