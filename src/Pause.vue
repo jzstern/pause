@@ -1,9 +1,11 @@
 <script>
+import Donate from "./components/Donate";
 import MarqueeText from "vue-marquee-text-component";
 
 export default {
   name: "Pause",
   components: {
+    Donate,
     MarqueeText
   },
   computed: {
@@ -57,29 +59,7 @@ export default {
           </a>
         </div>
       </div>
-      <div class="donate-container" v-if="!isMobile">
-        <h2>donate directly using crypto</h2>
-
-        <div class="donate-total-container">
-          <p class="donate-total">$500</p>
-        </div>
-        <p class="copy">
-          Fellow crypto fam, now is your chance. If you have some money lying around in your wallet, put it to real use in one click. Donations will be split equally amongst the charities to the left.
-          <br />
-        </p>
-        <div class="donate-action">
-          <input
-            class="donate-input"
-            type="number"
-            max="100000"
-            placeholder="$0.00"
-            autocomplete="off"
-            autocorrect="off"
-            spellcheck="true"
-          />
-          <div ref="tipButton" class="donate-button" @click="incrementTip" type="button">donate</div>
-        </div>
-      </div>
+      <Donate />
     </div>
 
     <marquee-text v-if="!isMobile" class="marquee" :duration="160">
@@ -117,16 +97,6 @@ export default {
   src: url("./assets/MonumentExtended-Regular.otf");
 }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-h2 {
-  font-variant: small-caps;
-}
-
 .pause {
   position: fixed;
   z-index: 100000;
@@ -150,52 +120,6 @@ h2 {
   align-items: space-around;
   font-family: "neue-haas-unica";
   font-weight: 300;
-}
-
-.donate-container {
-  width: 450px;
-  margin: 0 5vw;
-}
-
-.donate-total-container {
-  font-size: 100px;
-  text-align: center;
-  border: 2px solid orange;
-  border-radius: 15px;
-  padding: 15px 0px;
-  margin: 0;
-  height: 175px;
-  font-variant-numeric: tabular-nums;
-}
-
-.donate-total {
-  margin: 0;
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.donate-action {
-  margin-top: 25px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.donate-input {
-  padding-left: 22px;
-  height: 50px;
-  border: 1px solid grey;
-  border-radius: 6px;
-  background: none;
-  font-size: 18px;
-  width: 200px;
-  color: white;
-
-  &::placeholder {
-    color: darkgrey;
-  }
 }
 
 .info-container {
@@ -268,55 +192,6 @@ h2 {
   padding-left: 5px;
   vertical-align: middle;
   transform: translateY(-1px);
-}
-
-.donate-button {
-  // @extend %non-selectable;
-  // @extend %quick-ease;
-  cursor: pointer;
-  background: #ffcb20;
-  // border: 2px solid rgba(44, 25, 92, 0.65);
-  box-sizing: border-box;
-  border-radius: 6px;
-  padding: auto 30px;
-  color: rgb(0, 0, 0);
-  font-size: 22px;
-  line-height: 14px;
-  text-align: center;
-
-  // font-variant: small-caps;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  overflow: hidden;
-  position: relative;
-
-  transition: all 0.2s ease;
-  outline: none;
-  box-shadow: 0px 4px 8px rgba(70, 38, 11, 0.35);
-
-  &:active {
-    transform: scale(0.99);
-    background: #ffc400;
-    transition: all 0.1s ease;
-    transform: translateY(2px);
-    box-shadow: 0px 0px rgba(70, 38, 11, 0.25);
-  }
-
-  &:after {
-    background: #ffda5f;
-    content: "";
-    height: 155px;
-    left: -75px;
-    opacity: 0.2;
-    position: absolute;
-    top: -50px;
-    transform: rotate(35deg);
-    transition: all 850ms cubic-bezier(0.19, 1, 0.22, 1);
-    width: 50px;
-    z-index: -10;
-  }
 }
 
 @media (max-width: 1100px) {
