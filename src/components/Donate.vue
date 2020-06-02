@@ -28,7 +28,7 @@
 
       <DonateButton
         :amount="amountETH"
-        @txSent="amountUSD = 0"
+        @txSent="handleTxSent"
         @txState="updateTxState"
       />
     </div>
@@ -91,13 +91,13 @@ export default {
       return this.amountUSD / this.ethPrice;
     },
     totalDonationsUSD() {
-      const totalDonationsETH = this.totalDonationsETH;
-      return (totalDonationsETH * this.ethPrice).toFixed(2);
+      return (this.totalDonationsETH * this.ethPrice).toFixed(2);
     },
   },
   data() {
     return {
       amountUSD: null,
+      amountToAdd: 0.0,
       ethPrice: null,
       isMobile: false,
       totalDonationsETH: 0,
@@ -127,10 +127,16 @@ export default {
 
       return ethQuery.data.ethereum.usd;
     },
-    updateTxState(event) {
-      console.log(event);
-      this.txState = event;
-      console.log(this.txState);
+    handleTxSent(amountETH) {
+      this.amountUSD = 0;
+      this.amountToAdd = amountETH;
+    },
+    updateTxState(txState) {
+      this.txState = txState;
+      if (txState === "confirmed") {
+        this.totalDonationsETH =
+          this.amountToAdd + Number(this.totalDonationsETH);
+      }
     },
   },
   async mounted() {
