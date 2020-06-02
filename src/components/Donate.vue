@@ -7,9 +7,9 @@
       <p class="donate-total-label">total amount donated</p>
     </div>
     <p class="copy">
-      Put the money in your wallet to use. We currently accept ETH. Donations
-      will be sent to a wallet we control and split equally amongst the Center
-      for Policing Equity, Equal Justice Initiative, and the ACLU.
+      Donations will be sent to a wallet we control and split equally amongst
+      the Center for Policing Equity, Equal Justice Initiative, and the ACLU. We
+      currently accept donations in ETH.
       <br />
     </p>
     <div class="donate-action">
@@ -26,45 +26,46 @@
         onblur="this.placeholder = '$0.00'"
       />
 
-      <DonateButton
-        :amount="amountETH"
-        @txSent="amountUSD = 0"
-        @txState="updateTxState"
-      />
+      <DonateButton :amount="amountETH" @txSent="amountUSD = 0" @txState="updateTxState" />
     </div>
     <div class="tx-state">
-      <div class="tx-pending">
-        <svg
-          version="1.1"
-          id="L9"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          x="0px"
-          y="0px"
-          viewBox="0 0 100 100"
-          enable-background="new 0 0 0 0"
-          xml:space="preserve"
-        >
-          <path
-            fill="#fff"
-            d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"
+      <transition name="fade">
+        <div class="tx-pending" v-if="txState == 'pending'">
+          <svg
+            version="1.1"
+            id="L9"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="0 0 100 100"
+            enable-background="new 0 0 0 0"
+            xml:space="preserve"
           >
-            <animateTransform
-              attributeName="transform"
-              attributeType="XML"
-              type="rotate"
-              dur="1s"
-              from="0 50 50"
-              to="360 50 50"
-              repeatCount="indefinite"
-            />
-          </path>
-        </svg>
-        Transaction Pending
-      </div>
-      <!-- <div class="tx-confirmed">
-        Transaction Confirmed. Thank you for your donation
-      </div> -->
+            <path
+              fill="#fff"
+              d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"
+            >
+              <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="rotate"
+                dur="1s"
+                from="0 50 50"
+                to="360 50 50"
+                repeatCount="indefinite"
+              />
+            </path>
+          </svg>
+          Transaction Pending
+        </div>
+      </transition>
+      <transition name="fade">
+        <div
+          class="tx-confirmed"
+          v-if="txState == 'confirmed'"
+        >Transaction Confirmed. Thank you for your donation</div>
+      </transition>
     </div>
   </div>
 </template>
@@ -77,7 +78,7 @@ const CoinGeckoClient = new CoinGecko();
 export default {
   name: "Donate",
   components: {
-    DonateButton,
+    DonateButton
   },
   computed: {
     amountETH() {
@@ -86,7 +87,7 @@ export default {
     totalDonationsUSD() {
       const totalDonationsETH = this.totalDonationsETH;
       return (totalDonationsETH * this.ethPrice).toFixed(2);
-    },
+    }
   },
   data() {
     return {
@@ -94,24 +95,27 @@ export default {
       ethPrice: null,
       isMobile: false,
       totalDonationsETH: 1.2,
+      txState: null
     };
   },
   methods: {
     async getETHPrice() {
       let ethQuery = await CoinGeckoClient.simple.price({
         ids: ["ethereum"],
-        vs_currencies: ["usd"],
+        vs_currencies: ["usd"]
       });
 
       return ethQuery.data.ethereum.usd;
     },
     updateTxState(event) {
       console.log(event);
-    },
+      this.txState = event;
+      console.log(this.txState);
+    }
   },
   async created() {
     this.ethPrice = await this.getETHPrice();
-  },
+  }
 };
 </script>
 
@@ -221,6 +225,10 @@ h2 {
   font-size: 20px;
 }
 
+.tx-confirmed {
+  margin-top: 25px;
+}
+
 svg {
   transform: translateY(14px);
   width: 40px;
@@ -242,5 +250,13 @@ svg {
   .donate-container {
     display: none;
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

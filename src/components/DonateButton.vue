@@ -13,19 +13,19 @@ export default {
   name: "DonateButton",
   props: {
     amount: {
-      type: Number,
-    },
+      type: Number
+    }
   },
   data() {
     return {
       balance: null,
       network: null,
-      provider: null,
+      provider: null
     };
   },
   methods: {
     donate() {
-      if (this.amount == 0) alert("can't tip 0 homie");
+      if (this.amount == 0) return;
       else if (!this.provider) this.login();
       else if (this.balance <= this.amount) alert("insufficient funds");
       else {
@@ -42,7 +42,7 @@ export default {
             const txnParams = {
               from: accounts[0],
               to: "0xDd538141f00B6A3ee3b2BF6B14d64d026A533A18",
-              value: sendValue,
+              value: sendValue
             };
 
             web3.eth.sendTransaction(txnParams, async (error, txnHash) => {
@@ -60,10 +60,6 @@ export default {
                 } catch (e) {
                   console.error(e);
                   this.$emit("txState", null);
-                }
-
-                if (receipt && this.network === "main") {
-                  alert("thank you for supporting this important movement <3");
                 }
               }
             });
@@ -143,12 +139,12 @@ export default {
       await web3.currentProvider.enable();
       // await ethereum.enable();
       await this.getWalletInfo();
-    },
+    }
   },
   async mounted() {
     this.getWeb3Provider();
     this.getWalletInfo();
-  },
+  }
 };
 </script>
 
