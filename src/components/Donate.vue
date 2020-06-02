@@ -36,9 +36,12 @@
 </template>
 
 <script>
+/*eslint-disable */
 import DonateButton from "./DonateButton";
+import Web3 from "web3";
 const CoinGecko = require("coingecko-api");
 const CoinGeckoClient = new CoinGecko();
+const axios = require("axios");
 
 export default {
   name: "Donate",
@@ -59,7 +62,7 @@ export default {
       amountUSD: null,
       ethPrice: null,
       isMobile: false,
-      totalDonationsETH: 1.2,
+      totalDonationsETH: 0,
     };
   },
   methods: {
@@ -75,8 +78,35 @@ export default {
       console.log(event);
     },
   },
-  async created() {
+  async mounted() {
     this.ethPrice = await this.getETHPrice();
+    axios
+      .get(
+        "https://api.etherscan.io/api?module=account&action=balance&address=0xDd538141f00B6A3ee3b2BF6B14d64d026A533A18&tag=latest&apikey=21VJT5PWR94JCJGQGQIT2YWAPDFWUUSR5T"
+      )
+      .then((response) => {
+        if (response.status == "200") {
+          this.totalDonationsETH = web3.utils.fromWei(
+            response.data.result,
+            "ether"
+          );
+        }
+      });
+
+    setInterval(() => {
+      axios
+        .get(
+          "https://api.etherscan.io/api?module=account&action=balance&address=0xDd538141f00B6A3ee3b2BF6B14d64d026A533A18&tag=latest&apikey=21VJT5PWR94JCJGQGQIT2YWAPDFWUUSR5T"
+        )
+        .then((response) => {
+          if (response.status == "200") {
+            this.totalDonationsETH = web3.utils.fromWei(
+              response.data.result,
+              "ether"
+            );
+          }
+        });
+    }, 30000);
   },
 };
 </script>
