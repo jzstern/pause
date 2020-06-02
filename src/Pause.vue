@@ -71,30 +71,28 @@ export default {
     </div>
 
     <marquee-text v-if="!isMobile" class="marquee" :duration="160">
-      BLACK LIVES MATTER | BLACK LIVES MATTER | BLACK LIVES MATTER | BLACK LIVES
-      MATTER | BLACK LIVES MATTER | BLACK LIVES MATTER | BLACK LIVES MATTER |
-      BLACK LIVES MATTER | BLACK LIVES MATTER | BLACK LIVES MATTER | BLACK LIVES
-      MATTER | BLACK LIVES MATTER |
+      BLACK LIVES MATTER ■ BLACK LIVES MATTER ■ BLACK LIVES MATTER ■ BLACK LIVES
+      MATTER ■ BLACK LIVES MATTER ■ BLACK LIVES MATTER ■ BLACK LIVES MATTER ■
+      BLACK LIVES MATTER ■ BLACK LIVES MATTER ■ BLACK LIVES MATTER ■ BLACK LIVES
+      MATTER ■ BLACK LIVES MATTER ■
     </marquee-text>
     <marquee-text
       v-if="!isMobile"
       class="marquee marquee-bottom"
       :duration="260"
     >
-      SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT |
-      SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT |
-      SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT |
-      SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT |
+      SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■
+      SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■
+      SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■
+      SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■
     </marquee-text>
 
-    <marquee-text v-if="isMobile" class="marquee" :duration="60"
-      >BLACK LIVES MATTER | BLACK LIVES MATTER | BLACK LIVES MATTER
-      |</marquee-text
-    >
-    <marquee-text v-if="isMobile" class="marquee marquee-bottom" :duration="50"
-      >SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT
-      |</marquee-text
-    >
+    <marquee-text v-if="isMobile" class="marquee" :duration="60">
+      BLACK LIVES MATTER | BLACK LIVES MATTER | BLACK LIVES MATTER |
+    </marquee-text>
+    <marquee-text v-if="isMobile" class="marquee marquee-bottom" :duration="50">
+      SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT |
+    </marquee-text>
   </div>
 </template>
 
@@ -125,7 +123,7 @@ h2 {
   width: 100%;
   height: 100%;
   color: white;
-  // overflow: hidden;
+  overflow: hidden;
 }
 
 .content {

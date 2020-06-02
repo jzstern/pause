@@ -19,7 +19,6 @@
         v-model="donationAmountUSD"
         currency="USD"
         locale="en-US"
-        distraction-free="false"
         placeholder="$0.00"
         autocomplete="off"
         autocorrect="off"
