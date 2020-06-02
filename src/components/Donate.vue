@@ -7,15 +7,19 @@
       <p class="donate-total-label">total contributions</p>
     </div>
     <p class="copy">
-      Donations are sent to our wallet and will be split equally amongst
-      the Center for Policing Equity, Equal Justice Initiative, and the ACLU. We
-      currently accept donations in ETH. We are
+      We currently accept donations in ETH. Donations are sent to our wallet and will be split equally between
+      the Center for Policing Equity, Equal Justice Initiative, and the ACLU. We are
       <a
         class="us"
         href="https://twitter.com/michael_mckain"
         target="_blank"
       >real</a>&nbsp;
-      <a class="us" href="https://twitter.com/jzstern" target="_blank">people</a> and a receipt will be posted at the end of the campaign.
+      <a class="us" href="https://twitter.com/jzstern" target="_blank">people</a> and a receipt will be posted
+      <a
+        class="us"
+        href="https://twitter.com/loftradio_"
+        target="_blank"
+      >here</a>&nbsp;at the end of the campaign.
       <br />
     </p>
     <div class="donate-action">
@@ -70,7 +74,7 @@
         <div
           class="tx-confirmed"
           v-if="txState == 'confirmed'"
-        >Transaction Confirmed. Thank you for your donation</div>
+        >Transaction Confirmed. Thank you for your {{this.amountToAdd.toFixed(4)}} ETH donation!</div>
       </transition>
     </div>
   </div>
