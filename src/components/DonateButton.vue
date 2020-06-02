@@ -27,7 +27,7 @@ export default {
     donate() {
       if (this.amount == 0) return;
       else if (!this.provider) this.login();
-      else if (this.balance <= this.amount) alert("insufficient funds");
+      // else if (this.balance <= this.amount) alert("insufficient funds");
       else {
         const sendValue = web3.utils.toWei(
           this.amount.toFixed(8).toString(),
