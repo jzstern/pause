@@ -3,7 +3,8 @@
     <h2>donate directly using crypto</h2>
 
     <div class="donate-total-container">
-      <p class="donate-total">$500</p>
+      <p class="donate-total">$500.00</p>
+      <p class="donate-total-label">total donated</p>
     </div>
     <p class="copy">
       Fellow crypto fam, now is your chance. If you have some money lying around
@@ -12,15 +13,16 @@
       <br />
     </p>
     <div class="donate-action">
-      <input
-        class="donate-input"
-        type="number"
-        max="100000"
-        placeholder="$0.00"
-        autocomplete="off"
-        autocorrect="off"
-        spellcheck="true"
-      />
+      <span class="donate-input-dollar-symbol">
+        <input
+          class="donate-input"
+          type="number"
+          max="100000"
+          autocomplete="off"
+          autocorrect="off"
+          spellcheck="true"
+        />
+      </span>
       <DonateButton />
     </div>
   </div>
@@ -31,17 +33,22 @@ import DonateButton from "./DonateButton";
 export default {
   name: "Donate",
   components: {
-    DonateButton,
+    DonateButton
   },
   data() {
     return {
-      isMobile: false,
+      isMobile: false
     };
-  },
+  }
 };
 </script>
 
 <style scoped lang="scss">
+:focus {
+  outline: 0;
+  border-color: white;
+}
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -52,49 +59,102 @@ h2 {
   font-variant: small-caps;
 }
 
+.copy {
+  text-align: justify;
+}
+
 .donate-container {
   width: 450px;
   margin: 0 5vw;
 }
 
 .donate-total-container {
-  font-size: 100px;
-  text-align: center;
-  border: 2px solid orange;
-  border-radius: 15px;
-  padding: 15px 0px;
+  text-align: left;
+  // border-top: 2px solid white;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.308);
+  // border-radius: 15px;
+  padding: 0 0 25px 0;
   margin: 0;
-  height: 175px;
-  font-variant-numeric: tabular-nums;
+  // height: 175px;
 }
 
 .donate-total {
   margin: 0;
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  // position: relative;
+
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -70%);
+  background: -webkit-linear-gradient(
+    15deg,
+    rgb(248, 194, 45) 9%,
+    rgb(255, 73, 1) 75%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: anonymous;
+  font-size: 110px;
+  font-variant-numeric: tabular-nums;
+}
+
+.donate-total-label {
+  font-size: 16px;
+  font-variant: small-caps;
+  opacity: 0.5;
+  margin: 10px 0 0 0;
 }
 
 .donate-action {
-  margin-top: 25px;
+  margin-top: 35px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
 .donate-input {
-  padding-left: 22px;
-  height: 50px;
+  padding-left: 42px;
+  height: 60px;
   border: 1px solid grey;
+  box-sizing: border-box;
   border-radius: 6px;
   background: none;
-  font-size: 18px;
-  width: 200px;
+  font-size: 20px;
+  width: 250px;
   color: white;
 
   &::placeholder {
     color: darkgrey;
+  }
+}
+
+.donate-input-dollar-symbol {
+  position: relative;
+
+  &:before {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-56%);
+    content: "$";
+    left: 22px;
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .donate-container {
+    margin: 0 2vw;
+  }
+}
+
+@media (max-width: 900px) {
+  .copy {
+    text-align: justify;
+    font-size: 15px;
+  }
+
+  .donate-container {
+    display: none;
   }
 }
 </style>

@@ -102,6 +102,10 @@ export default {
   src: url("./assets/AnonymousPro-Regular.ttf");
 }
 
+h2 {
+  font-variant: small-caps;
+}
+
 .pause {
   position: fixed;
   z-index: 100000;
@@ -200,10 +204,6 @@ export default {
 }
 
 @media (max-width: 1100px) {
-  .donate-container {
-    margin: 0 2vw;
-  }
-
   .info-container {
     margin: 0 2vw;
   }

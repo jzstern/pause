@@ -1,6 +1,6 @@
 <template>
   <div class="donate-button" @click="donate" type="button">
-    <p>DONATE</p>
+    <p>Donate</p>
   </div>
 </template>
 
@@ -21,7 +21,8 @@ export default {
   // @extend %quick-ease;
   cursor: pointer;
   background: #ffcb20;
-  // border: 2px solid rgba(44, 25, 92, 0.65);
+  height: 60px;
+  border: 1px solid rgb(16, 16, 16);
   box-sizing: border-box;
   border-radius: 6px;
   padding: auto 30px;
@@ -29,6 +30,9 @@ export default {
   font-size: 22px;
   line-height: 14px;
   text-align: center;
+  flex-grow: 1;
+
+  margin-left: 15px;
 
   // font-variant: small-caps;
   display: flex;
