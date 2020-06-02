@@ -26,7 +26,11 @@
         onblur="this.placeholder = '$0.00'"
       />
 
-      <DonateButton :amount="amountETH" @txSent="amountUSD = 0" @txState="updateTxState" />
+      <DonateButton
+        :amount="amountETH"
+        @txSent="amountUSD = 0"
+        @txState="updateTxState"
+      />
     </div>
     <div class="tx-state">
       <transition name="fade">
@@ -61,24 +65,26 @@
         </div>
       </transition>
       <transition name="fade">
-        <div
-          class="tx-confirmed"
-          v-if="txState == 'confirmed'"
-        >Transaction Confirmed. Thank you for your donation</div>
+        <div class="tx-confirmed" v-if="txState == 'confirmed'">
+          Transaction Confirmed. Thank you for your donation
+        </div>
       </transition>
     </div>
   </div>
 </template>
 
 <script>
+/*eslint-disable */
 import DonateButton from "./DonateButton";
+import Web3 from "web3";
 const CoinGecko = require("coingecko-api");
 const CoinGeckoClient = new CoinGecko();
+const axios = require("axios");
 
 export default {
   name: "Donate",
   components: {
-    DonateButton
+    DonateButton,
   },
   computed: {
     amountETH() {
@@ -87,22 +93,36 @@ export default {
     totalDonationsUSD() {
       const totalDonationsETH = this.totalDonationsETH;
       return (totalDonationsETH * this.ethPrice).toFixed(2);
-    }
+    },
   },
   data() {
     return {
       amountUSD: null,
       ethPrice: null,
       isMobile: false,
-      totalDonationsETH: 1.2,
-      txState: null
+      totalDonationsETH: 0,
+      txState: null,
     };
   },
   methods: {
+    getTotalDonations() {
+      axios
+        .get(
+          "https://api.etherscan.io/api?module=account&action=balance&address=0xDd538141f00B6A3ee3b2BF6B14d64d026A533A18&tag=latest&apikey=21VJT5PWR94JCJGQGQIT2YWAPDFWUUSR5T"
+        )
+        .then((response) => {
+          if (response.status == "200") {
+            this.totalDonationsETH = web3.utils.fromWei(
+              response.data.result,
+              "ether"
+            );
+          }
+        });
+    },
     async getETHPrice() {
       let ethQuery = await CoinGeckoClient.simple.price({
         ids: ["ethereum"],
-        vs_currencies: ["usd"]
+        vs_currencies: ["usd"],
       });
 
       return ethQuery.data.ethereum.usd;
@@ -111,11 +131,16 @@ export default {
       console.log(event);
       this.txState = event;
       console.log(this.txState);
-    }
+    },
   },
-  async created() {
+  async mounted() {
     this.ethPrice = await this.getETHPrice();
-  }
+    this.getTotalDonations();
+
+    setInterval(() => {
+      this.getTotalDonations();
+    }, 30000);
+  },
 };
 </script>
 
