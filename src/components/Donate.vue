@@ -25,7 +25,7 @@
           spellcheck="true"
         />
       </span>
-      <DonateButton :amount="donationAmountETH" />
+      <DonateButton :amount="Number(donationAmountUSD)" />
     </div>
   </div>
 </template>
@@ -36,11 +36,6 @@ export default {
   name: "Donate",
   components: {
     DonateButton,
-  },
-  computed: {
-    donationAmountETH() {
-      return this.donationAmountUSD / 200;
-    },
   },
   data() {
     return {
