@@ -3,7 +3,7 @@
     <h2>donate directly using crypto</h2>
 
     <div class="donate-total-container">
-      <p class="donate-total">$500.00</p>
+      <p class="donate-total">${{ totalDonationsUSD }}</p>
       <p class="donate-total-label">total donated</p>
     </div>
     <p class="copy">
@@ -44,12 +44,22 @@ export default {
     amountETH() {
       return this.amountUSD / this.ethPrice;
     },
+    totalDonationsUSD() {
+      // const totalDonationsETH = this.totalDonationsETH;
+      // let usd = this.totalDonationsETH.toString();
+      // if (usd.indexOf(".") == -1) return usd + ".00";
+      // else if (usd.substring(usd.length - 2, usd.length) == ".5")
+      //   return usd + "0";
+      // else return usd;
+      return "500.00";
+    },
   },
   data() {
     return {
       amountUSD: null,
       ethPrice: null,
       isMobile: false,
+      totalDonationsETH: 1.2,
     };
   },
   methods: {
@@ -62,9 +72,8 @@ export default {
       return ethQuery.data.ethereum.usd;
     },
   },
-  async mounted() {
+  async created() {
     this.ethPrice = await this.getETHPrice();
-    console.log(this.ethPrice);
   },
 };
 </script>
