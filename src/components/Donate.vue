@@ -16,7 +16,7 @@
       <!-- <span class="donate-input-dollar-symbol"> -->
       <currency-input
         class="donate-input"
-        v-model="value"
+        v-model="donationAmountUSD"
         currency="USD"
         locale="en-US"
         distraction-free="false"
@@ -55,19 +55,19 @@ import DonateButton from "./DonateButton";
 export default {
   name: "Donate",
   components: {
-    DonateButton
+    DonateButton,
   },
   computed: {
     donationAmountETH() {
       return this.donationAmountUSD / 200;
-    }
+    },
   },
   data() {
     return {
       donationAmountUSD: null,
-      isMobile: false
+      isMobile: false,
     };
-  }
+  },
 };
 </script>
 

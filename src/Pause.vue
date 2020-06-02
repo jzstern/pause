@@ -6,13 +6,13 @@ export default {
   name: "Pause",
   components: {
     Donate,
-    MarqueeText
+    MarqueeText,
   },
   computed: {
     isMobile() {
       return false;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -22,14 +22,15 @@ export default {
       <div class="info-container">
         <h2>loft is off the air</h2>
         <p class="copy">
-          Much of the music and culture we surround ourselves with has roots in the black community. We support and join those
-          protesting systemic racism and injustice across the United States and across the world.
+          Much of the music and culture we surround ourselves with has its roots
+          in the black community. We support and join those protesting systemic
+          racism and injustice across the United States and across the world.
           <br />
         </p>
 
         <p class="copy">
-          Below are donation links to some organizations we've given to. We encourage
-          you to give if you're able. Peace to all.
+          Below are donation links to some organizations we've given to. We
+          encourage you to give if you're able. Peace to all.
           <br />
         </p>
         <div class="link-container">
@@ -37,13 +38,15 @@ export default {
             class="link"
             href="https://policingequity.org/donate"
             target="_blank"
-          >Center for Policing Equity</a>
+            >Center for Policing Equity</a
+          >
 
           <a
             class="link"
             href="https://support.eji.org/give/153413/#!/donation/checkout"
             target="_blank"
-          >Equal Justice Initiative</a>
+            >Equal Justice Initiative</a
+          >
 
           <!-- <a class="link" href="https://www.cuapb.org/t" target="_blank">CUAPB</a> -->
 
@@ -51,9 +54,14 @@ export default {
             class="link"
             href="https://action.aclu.org/give/now?redirect=donate"
             target="_blank"
-          >ACLU</a>
+            >ACLU</a
+          >
 
-          <a class="more" target="_blank" href="https://blacklivesmatters.carrd.co/">
+          <a
+            class="more"
+            target="_blank"
+            href="https://blacklivesmatters.carrd.co/"
+          >
             More ways to help
             <img class="link-out" src="./assets/LinkOut.svg" />
           </a>
@@ -68,23 +76,25 @@ export default {
       BLACK LIVES MATTER | BLACK LIVES MATTER | BLACK LIVES MATTER | BLACK LIVES
       MATTER | BLACK LIVES MATTER |
     </marquee-text>
-    <marquee-text v-if="!isMobile" class="marquee marquee-bottom" :duration="260">
+    <marquee-text
+      v-if="!isMobile"
+      class="marquee marquee-bottom"
+      :duration="260"
+    >
       SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT |
       SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT |
       SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT |
       SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT |
     </marquee-text>
 
-    <marquee-text
-      v-if="isMobile"
-      class="marquee"
-      :duration="60"
-    >BLACK LIVES MATTER | BLACK LIVES MATTER | BLACK LIVES MATTER |</marquee-text>
-    <marquee-text
-      v-if="isMobile"
-      class="marquee marquee-bottom"
-      :duration="50"
-    >SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT |</marquee-text>
+    <marquee-text v-if="isMobile" class="marquee" :duration="60"
+      >BLACK LIVES MATTER | BLACK LIVES MATTER | BLACK LIVES MATTER
+      |</marquee-text
+    >
+    <marquee-text v-if="isMobile" class="marquee marquee-bottom" :duration="50"
+      >SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT
+      |</marquee-text
+    >
   </div>
 </template>
 
@@ -115,7 +125,7 @@ h2 {
   width: 100%;
   height: 100%;
   color: white;
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 .content {
@@ -167,6 +177,7 @@ h2 {
 }
 
 .marquee {
+  opacity: 0.8;
   color: white;
   width: 100vw;
   font-family: monument;
@@ -215,8 +226,12 @@ h2 {
 }
 
 @media (max-width: 900px) {
+  h2 {
+    margin: 5px 0px 5px 0px;
+  }
+
   .content {
-    top: 47%;
+    top: 50%;
     width: 85vw;
     transform: translate(-50%, -50%);
     margin: auto;
@@ -225,6 +240,7 @@ h2 {
   .copy {
     text-align: justify;
     font-size: 15px;
+    margin: 5px 0px 5px 0px;
   }
 
   .donate-container {
@@ -243,7 +259,8 @@ h2 {
     border: 1px solid #ffcb20;
   }
   .marquee {
-    font-size: 22px;
+    font-size: 18px;
+    margin: 5px 0;
   }
 }
 </style>
