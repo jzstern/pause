@@ -26,25 +26,41 @@
         onfocus="this.placeholder = ''"
         onblur="this.placeholder = '$0.00'"
       />
-      <!-- <input
-          v-model="donationAmountUSD"
-          v-currency="{
-            currency: '{ , }',
-            locale: 'en-US',
-            valuerange: '{0, 100000}',
-            allownegative: 'false'
-          }"
-          class="donate-input"
-          tyoe="number"
-          placeholder="0.00"
-          autocomplete="off"
-          autocorrect="off"
-          spellcheck="true"
-          onfocus="this.placeholder = ''"
-          onblur="this.placeholder = '0.00'"
-      />-->
-      <!-- </span> -->
       <DonateButton :amount="donationAmountETH" />
+    </div>
+    <div class="tx-state">
+      <div class="tx-pending">
+        <svg
+          version="1.1"
+          id="L9"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          viewBox="0 0 100 100"
+          enable-background="new 0 0 0 0"
+          xml:space="preserve"
+        >
+          <path
+            fill="#fff"
+            d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"
+          >
+            <animateTransform
+              attributeName="transform"
+              attributeType="XML"
+              type="rotate"
+              dur="1s"
+              from="0 50 50"
+              to="360 50 50"
+              repeatCount="indefinite"
+            />
+          </path>
+        </svg>
+        Transaction Pending
+      </div>
+      <!-- <div class="tx-confirmed">
+        Transaction Confirmed. Thank you for your donation
+      </div> -->
     </div>
   </div>
 </template>
@@ -167,6 +183,19 @@ h2 {
     left: 22px;
     font-size: 22px;
   }
+}
+
+.tx-state {
+  margin-top: 15px;
+  // line-height: 50px;
+  font-family: anonymous;
+  font-size: 20px;
+}
+
+svg {
+  transform: translateY(14px);
+  width: 40px;
+  height: 40px;
 }
 
 @media (max-width: 1100px) {
