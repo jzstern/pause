@@ -9,7 +9,13 @@
     <p class="copy">
       Donations are sent to our wallet and will be split equally amongst
       the Center for Policing Equity, Equal Justice Initiative, and the ACLU. We
-      currently accept donations in ETH.
+      currently accept donations in ETH. We are
+      <a
+        class="us"
+        href="https://twitter.com/michael_mckain"
+        target="_blank"
+      >real</a>&nbsp;
+      <a class="us" href="https://twitter.com/jzstern" target="_blank">people</a> and a receipt will be posted at the end of the campaign.
       <br />
     </p>
     <div class="donate-action">
@@ -26,11 +32,7 @@
         onblur="this.placeholder = '$0.00'"
       />
 
-      <DonateButton
-        :amount="amountETH"
-        @txSent="amountUSD = 0"
-        @txState="updateTxState"
-      />
+      <DonateButton :amount="amountETH" @txSent="amountUSD = 0" @txState="updateTxState" />
     </div>
     <div class="tx-state">
       <transition name="fade">
@@ -65,9 +67,10 @@
         </div>
       </transition>
       <transition name="fade">
-        <div class="tx-confirmed" v-if="txState == 'confirmed'">
-          Transaction Confirmed. Thank you for your donation
-        </div>
+        <div
+          class="tx-confirmed"
+          v-if="txState == 'confirmed'"
+        >Transaction Confirmed. Thank you for your donation</div>
       </transition>
     </div>
   </div>
@@ -84,7 +87,7 @@ const axios = require("axios");
 export default {
   name: "Donate",
   components: {
-    DonateButton,
+    DonateButton
   },
   computed: {
     amountETH() {
@@ -93,7 +96,7 @@ export default {
     totalDonationsUSD() {
       const totalDonationsETH = this.totalDonationsETH;
       return (totalDonationsETH * this.ethPrice).toFixed(2);
-    },
+    }
   },
   data() {
     return {
@@ -101,7 +104,7 @@ export default {
       ethPrice: null,
       isMobile: false,
       totalDonationsETH: 0,
-      txState: null,
+      txState: null
     };
   },
   methods: {
@@ -110,9 +113,9 @@ export default {
         .get(
           "https://api.etherscan.io/api?module=account&action=balance&address=0xDd538141f00B6A3ee3b2BF6B14d64d026A533A18&tag=latest&apikey=21VJT5PWR94JCJGQGQIT2YWAPDFWUUSR5T"
         )
-        .then((response) => {
+        .then(response => {
           if (response.status == "200") {
-            this.totalDonationsETH = web3.utils.fromWei(
+            this.totalDonationsETH = Web3.utils.fromWei(
               response.data.result,
               "ether"
             );
@@ -122,7 +125,7 @@ export default {
     async getETHPrice() {
       let ethQuery = await CoinGeckoClient.simple.price({
         ids: ["ethereum"],
-        vs_currencies: ["usd"],
+        vs_currencies: ["usd"]
       });
 
       return ethQuery.data.ethereum.usd;
@@ -131,7 +134,7 @@ export default {
       console.log(event);
       this.txState = event;
       console.log(this.txState);
-    },
+    }
   },
   async mounted() {
     this.ethPrice = await this.getETHPrice();
@@ -140,7 +143,7 @@ export default {
     setInterval(() => {
       this.getTotalDonations();
     }, 30000);
-  },
+  }
 };
 </script>
 
@@ -258,6 +261,17 @@ svg {
   transform: translateY(14px);
   width: 40px;
   height: 40px;
+}
+
+.us {
+  text-decoration: none;
+  color: #ffbe20;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+    color: darken(#ffbe20, 20%);
+  }
 }
 
 @media (max-width: 1100px) {

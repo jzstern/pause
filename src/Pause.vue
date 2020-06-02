@@ -6,13 +6,13 @@ export default {
   name: "Pause",
   components: {
     Donate,
-    MarqueeText,
+    MarqueeText
   },
   computed: {
     isMobile() {
       return false;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -22,7 +22,7 @@ export default {
       <div class="info-container">
         <h2>loft is off the air</h2>
         <p class="copy">
-          Much of the music and culture we surround ourselves with has its roots
+          So much of the music and culture we surround ourselves with has its roots
           in the black community. We support and join those protesting systemic
           racism and injustice across the United States and across the world.
           <br />
@@ -38,15 +38,13 @@ export default {
             class="link"
             href="https://policingequity.org/donate"
             target="_blank"
-            >Center for Policing Equity</a
-          >
+          >Center for Policing Equity</a>
 
           <a
             class="link"
             href="https://support.eji.org/give/153413/#!/donation/checkout"
             target="_blank"
-            >Equal Justice Initiative</a
-          >
+          >Equal Justice Initiative</a>
 
           <!-- <a class="link" href="https://www.cuapb.org/t" target="_blank">CUAPB</a> -->
 
@@ -54,14 +52,9 @@ export default {
             class="link"
             href="https://action.aclu.org/give/now?redirect=donate"
             target="_blank"
-            >ACLU</a
-          >
+          >ACLU</a>
 
-          <a
-            class="more"
-            target="_blank"
-            href="https://blacklivesmatters.carrd.co/"
-          >
+          <a class="more" target="_blank" href="https://blacklivesmatters.carrd.co/">
             More ways to help
             <img class="link-out" src="./assets/LinkOut.svg" />
           </a>
@@ -76,23 +69,23 @@ export default {
       BLACK LIVES MATTER ■ BLACK LIVES MATTER ■ BLACK LIVES MATTER ■ BLACK LIVES
       MATTER ■ BLACK LIVES MATTER ■
     </marquee-text>
-    <marquee-text
-      v-if="!isMobile"
-      class="marquee marquee-bottom"
-      :duration="260"
-    >
+    <marquee-text v-if="!isMobile" class="marquee marquee-bottom" :duration="260">
       SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■
       SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■
       SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■
       SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■
     </marquee-text>
 
-    <marquee-text v-if="isMobile" class="marquee" :duration="60">
-      BLACK LIVES MATTER | BLACK LIVES MATTER | BLACK LIVES MATTER |
-    </marquee-text>
-    <marquee-text v-if="isMobile" class="marquee marquee-bottom" :duration="50">
-      SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT |
-    </marquee-text>
+    <marquee-text
+      v-if="isMobile"
+      class="marquee"
+      :duration="60"
+    >BLACK LIVES MATTER | BLACK LIVES MATTER | BLACK LIVES MATTER |</marquee-text>
+    <marquee-text
+      v-if="isMobile"
+      class="marquee marquee-bottom"
+      :duration="50"
+    >SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT |</marquee-text>
   </div>
 </template>
 
@@ -128,9 +121,10 @@ h2 {
 
 .content {
   position: absolute;
-  top: 20vh;
+  top: 48%;
   left: 50%;
-  transform: translateX(-50%);
+  height: 500px;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
