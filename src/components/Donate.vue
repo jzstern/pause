@@ -4,12 +4,12 @@
 
     <div class="donate-total-container">
       <p class="donate-total">${{ totalDonationsUSD }}</p>
-      <p class="donate-total-label">total amount donated</p>
+      <p class="donate-total-label">total contributions</p>
     </div>
     <p class="copy">
-      Put the money in your wallet to use. We currently accept ETH. Donations
-      will be sent to a wallet we control and split equally amongst the Center
-      for Policing Equity, Equal Justice Initiative, and the ACLU.
+      Donations will be sent to a wallet we control and split equally amongst
+      the Center for Policing Equity, Equal Justice Initiative, and the ACLU. We
+      currently accept donations in ETH.
       <br />
     </p>
     <div class="donate-action">
@@ -31,6 +31,44 @@
         @txSent="amountUSD = 0"
         @txState="updateTxState"
       />
+    </div>
+    <div class="tx-state">
+      <transition name="fade">
+        <div class="tx-pending" v-if="txState == 'pending'">
+          <svg
+            version="1.1"
+            id="L9"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="0 0 100 100"
+            enable-background="new 0 0 0 0"
+            xml:space="preserve"
+          >
+            <path
+              fill="#fff"
+              d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"
+            >
+              <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="rotate"
+                dur="1s"
+                from="0 50 50"
+                to="360 50 50"
+                repeatCount="indefinite"
+              />
+            </path>
+          </svg>
+          Transaction Pending
+        </div>
+      </transition>
+      <transition name="fade">
+        <div class="tx-confirmed" v-if="txState == 'confirmed'">
+          Transaction Confirmed. Thank you for your donation
+        </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -63,37 +101,11 @@ export default {
       ethPrice: null,
       isMobile: false,
       totalDonationsETH: 0,
+      txState: null,
     };
   },
   methods: {
-    async getETHPrice() {
-      let ethQuery = await CoinGeckoClient.simple.price({
-        ids: ["ethereum"],
-        vs_currencies: ["usd"],
-      });
-
-      return ethQuery.data.ethereum.usd;
-    },
-    updateTxState(event) {
-      console.log(event);
-    },
-  },
-  async mounted() {
-    this.ethPrice = await this.getETHPrice();
-    axios
-      .get(
-        "https://api.etherscan.io/api?module=account&action=balance&address=0xDd538141f00B6A3ee3b2BF6B14d64d026A533A18&tag=latest&apikey=21VJT5PWR94JCJGQGQIT2YWAPDFWUUSR5T"
-      )
-      .then((response) => {
-        if (response.status == "200") {
-          this.totalDonationsETH = web3.utils.fromWei(
-            response.data.result,
-            "ether"
-          );
-        }
-      });
-
-    setInterval(() => {
+    getTotalDonations() {
       axios
         .get(
           "https://api.etherscan.io/api?module=account&action=balance&address=0xDd538141f00B6A3ee3b2BF6B14d64d026A533A18&tag=latest&apikey=21VJT5PWR94JCJGQGQIT2YWAPDFWUUSR5T"
@@ -106,6 +118,27 @@ export default {
             );
           }
         });
+    },
+    async getETHPrice() {
+      let ethQuery = await CoinGeckoClient.simple.price({
+        ids: ["ethereum"],
+        vs_currencies: ["usd"],
+      });
+
+      return ethQuery.data.ethereum.usd;
+    },
+    updateTxState(event) {
+      console.log(event);
+      this.txState = event;
+      console.log(this.txState);
+    },
+  },
+  async mounted() {
+    this.ethPrice = await this.getETHPrice();
+    this.getTotalDonations();
+
+    setInterval(() => {
+      this.getTotalDonations();
     }, 30000);
   },
 };
@@ -210,6 +243,23 @@ h2 {
   }
 }
 
+.tx-state {
+  margin-top: 15px;
+  // line-height: 50px;
+  font-family: anonymous;
+  font-size: 20px;
+}
+
+.tx-confirmed {
+  margin-top: 25px;
+}
+
+svg {
+  transform: translateY(14px);
+  width: 40px;
+  height: 40px;
+}
+
 @media (max-width: 1100px) {
   .donate-container {
     margin: 0 2vw;
@@ -225,5 +275,13 @@ h2 {
   .donate-container {
     display: none;
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
