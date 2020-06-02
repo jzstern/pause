@@ -45,13 +45,8 @@ export default {
       return this.amountUSD / this.ethPrice;
     },
     totalDonationsUSD() {
-      // const totalDonationsETH = this.totalDonationsETH;
-      // let usd = this.totalDonationsETH.toString();
-      // if (usd.indexOf(".") == -1) return usd + ".00";
-      // else if (usd.substring(usd.length - 2, usd.length) == ".5")
-      //   return usd + "0";
-      // else return usd;
-      return "500.00";
+      const totalDonationsETH = this.totalDonationsETH;
+      return (totalDonationsETH * this.ethPrice).toFixed(2);
     },
   },
   data() {
