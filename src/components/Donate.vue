@@ -4,10 +4,10 @@
 
     <div class="donate-total-container">
       <p class="donate-total">${{ totalDonationsUSD }}</p>
-      <p class="donate-total-label">total amount donated</p>
+      <p class="donate-total-label">total contributions</p>
     </div>
     <p class="copy">
-      Donations will be sent to a wallet we control and split equally amongst
+      Donations are sent to our wallet and will be split equally amongst
       the Center for Policing Equity, Equal Justice Initiative, and the ACLU. We
       currently accept donations in ETH.
       <br />
