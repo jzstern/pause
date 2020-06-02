@@ -117,6 +117,11 @@ export default {
   src: url("./assets/MonumentExtended-Regular.otf");
 }
 
+@font-face {
+  font-family: "anonymous";
+  src: url("./assets/AnonymousPro-Regular.ttf");
+}
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -158,9 +163,8 @@ h2 {
 }
 
 .donate-total-container {
-  font-size: 100px;
   text-align: center;
-  border: 2px solid orange;
+  border: 2px solid white;
   border-radius: 15px;
   padding: 15px 0px;
   margin: 0;
@@ -171,9 +175,20 @@ h2 {
 .donate-total {
   margin: 0;
   position: relative;
+
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background: -webkit-linear-gradient(
+    15deg,
+    hsl(259.5, 93.5%, 57.5%) 9%,
+    hsl(359.1, 100%, 50.2%) 75%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: anonymous;
+  font-size: 120px;
+  letter-spacing: 0.03em;
 }
 
 .donate-action {
