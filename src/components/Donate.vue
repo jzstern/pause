@@ -13,6 +13,7 @@
     </p>
     <div class="donate-action">
       <input
+        :value="donationAmountUSD"
         class="donate-input"
         type="number"
         max="100000"
@@ -21,7 +22,7 @@
         autocorrect="off"
         spellcheck="true"
       />
-      <DonateButton />
+      <DonateButton :amount="donationAmountETH" />
     </div>
   </div>
 </template>
@@ -33,8 +34,14 @@ export default {
   components: {
     DonateButton,
   },
+  computed: {
+    donationAmountETH() {
+      return this.donationAmountUSD / 200;
+    },
+  },
   data() {
     return {
+      donationAmountUSD: null,
       isMobile: false,
     };
   },
