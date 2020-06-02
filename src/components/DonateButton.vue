@@ -12,12 +12,12 @@ export default {
   name: "DonateButton",
   props: {
     amount: {
-      type: Number,
-    },
+      type: Number
+    }
   },
   data() {
     return {
-      provider: null,
+      provider: null
     };
   },
   methods: {
@@ -159,7 +159,7 @@ export default {
       //     }
       //   });
       // }
-    },
+    }
   },
   mounted() {
     // let ethereum = window.ethereum;
@@ -174,7 +174,7 @@ export default {
     //   });
     // }
     // var web3Provider = new providers.Web3Provider(web3.currentProvider, network);
-  },
+  }
 };
 </script>
 
@@ -190,7 +190,7 @@ export default {
   border-radius: 6px;
   padding: auto 30px;
   color: rgb(0, 0, 0);
-  font-size: 22px;
+  font-size: 20px;
   line-height: 14px;
   text-align: center;
   flex-grow: 1;
@@ -209,9 +209,18 @@ export default {
   outline: none;
   box-shadow: 0px 4px 8px rgba(70, 38, 11, 0.35);
 
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+
+  &:hover {
+    background: darken(#ffcb20, 20%);
+  }
+
   &:active {
     transform: scale(0.99);
-    background: #ffc400;
+    background: darken(#ffcb20, 40%);
     transition: all 0.1s ease;
     transform: translateY(2px);
     box-shadow: 0px 0px rgba(70, 38, 11, 0.25);

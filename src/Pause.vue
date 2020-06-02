@@ -22,7 +22,7 @@ export default {
       <div class="info-container">
         <h2>loft is off the air</h2>
         <p class="copy">
-          The music and culture we surround ourselves with largely comes from or has roots in the black community. We support and join those
+          Much of the music and culture we surround ourselves with has roots in the black community. We support and join those
           protesting systemic racism and injustice across the United States and across the world.
           <br />
         </p>
@@ -172,6 +172,11 @@ h2 {
   font-family: monument;
   font-size: 24px;
   margin: 20px 0px;
+
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 }
 
 .marquee-bottom {
@@ -211,7 +216,7 @@ h2 {
 
 @media (max-width: 900px) {
   .content {
-    top: 50%;
+    top: 47%;
     width: 85vw;
     transform: translate(-50%, -50%);
     margin: auto;
