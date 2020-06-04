@@ -22,7 +22,7 @@ export default {
       <div class="info-container">
         <h2>loft is off the air</h2>
         <p class="copy">
-          So much of the music and culture we surround ourselves with has its roots
+          So much of the music and culture we surround ourselves with comes from or has roots
           in the black community. We support and join those protesting systemic
           racism and injustice across the United States and across the world.
           <br />
@@ -70,10 +70,10 @@ export default {
       MATTER ■ BLACK LIVES MATTER ■
     </marquee-text>
     <marquee-text v-if="!isMobile" class="marquee marquee-bottom" :duration="260">
-      SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■
-      SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■
-      SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■
-      SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■ SUPPORT THE MOVEMENT ■
+      SUPPORT THE MOVEMENT ■ FUND THE MOVEMENT ■ SUPPORT THE MOVEMENT ■
+      FUND THE MOVEMENT ■ SUPPORT THE MOVEMENT ■ FUND THE MOVEMENT ■
+      SUPPORT THE MOVEMENT ■ FUND THE MOVEMENT ■ SUPPORT THE MOVEMENT ■
+      FUND THE MOVEMENT ■ SUPPORT THE MOVEMENT ■ FUND THE MOVEMENT ■
     </marquee-text>
 
     <marquee-text

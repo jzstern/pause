@@ -14,7 +14,7 @@
         href="https://twitter.com/michael_mckain"
         target="_blank"
       >real</a>&nbsp;
-      <a class="us" href="https://twitter.com/jzstern" target="_blank">people</a> and a receipt will be posted
+      <a class="us" href="https://twitter.com/jzstern" target="_blank">people</a> and receipts will be posted
       <a
         class="us"
         href="https://twitter.com/loftradio_"
