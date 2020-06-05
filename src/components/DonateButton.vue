@@ -182,7 +182,10 @@ export default {
   user-select: none; /* Standard */
 
   &:hover {
-    background: darken(#ffcb20, 20%);
+    // background: darken(#ffcb20, 20%);
+    color: #ffcb20;
+    border: 1px solid #ffcb20;
+    background: rgba(70, 38, 11, 0);
   }
 
   &:active {

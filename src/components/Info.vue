@@ -38,26 +38,6 @@
 </template>
 
 <style scoped lang="scss">
-@media (max-width: 1100px) {
-  .info-container {
-    margin: 0 2vw;
-  }
-}
-
-@media (max-width: 1000px) {
-  .info-container {
-    margin: auto;
-  }
-
-  .link {
-    width: 85vw;
-    max-width: 450px;
-    padding: 7px 0px;
-    color: #ffcb20;
-    border: 1px solid #ffcb20;
-  }
-}
-
 h2 {
   font-variant: small-caps;
 }
@@ -117,6 +97,26 @@ h2 {
     color: #ffcb20;
     border: 1px solid #ffcb20;
     transition: 0.25s;
+  }
+}
+
+@media (max-width: 1100px) {
+  .info-container {
+    margin: 0 2vw;
+  }
+}
+
+@media (max-width: 1000px) {
+  .info-container {
+    margin: auto;
+  }
+
+  .link {
+    width: 85vw;
+    max-width: 450px;
+    padding: 7px 0px;
+    color: #ffcb20;
+    border: 1px solid #ffcb20;
   }
 }
 </style>

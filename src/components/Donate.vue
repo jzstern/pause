@@ -168,6 +168,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@media (max-width: 1100px) {
+  .donate-container {
+    margin: 0 2vw;
+  }
+}
+
+@media (max-width: 1000px) {
+  .donate-container {
+    display: none;
+  }
+}
+
 :focus {
   outline: 0;
   opacity: 1;
@@ -280,18 +292,6 @@ svg {
   &:hover {
     text-decoration: underline;
     color: darken(#ffbe20, 20%);
-  }
-}
-
-@media (max-width: 1100px) {
-  .donate-container {
-    margin: 0 2vw;
-  }
-}
-
-@media (max-width: 1000px) {
-  .donate-container {
-    display: none;
   }
 }
 

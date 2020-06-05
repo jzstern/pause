@@ -20,7 +20,7 @@ export default {
 <template>
   <div class="pause">
     <div class="content">
-      <Info />
+      <Info id="info" />
       <Donate />
     </div>
 
@@ -112,8 +112,11 @@ export default {
 @media (max-width: 1000px) {
   .content {
     top: 50%;
-    // width: 85vw;
     transform: translate(-50%, -50%);
+    margin: auto;
+  }
+
+  #info {
     margin: auto;
   }
 
@@ -127,17 +130,15 @@ export default {
     margin: 5px 0px 5px 0px;
   }
 
-  .link {
-    width: 85vw;
-    max-width: 450px;
-    padding: 7px 0px;
-    color: #ffcb20;
-    border: 1px solid #ffcb20;
-  }
-
   .marquee {
     font-size: 18px;
     margin: 5px 0;
+  }
+}
+
+@media (max-width: 1000px) {
+  .content {
+    width: 85vw;
   }
 }
 </style>
