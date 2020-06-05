@@ -31,6 +31,7 @@
         placeholder="$0.00"
         onfocus="this.placeholder = ''"
         onblur="this.placeholder = '$0.00'"
+        distraction-free="{hideCurrencySymbol: false}"
       />
 
       <DonateButton :amount="amountETH" @txSent="handleTxSent" @txState="updateTxState" />
