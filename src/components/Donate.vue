@@ -103,7 +103,8 @@ export default {
       return this.amountUSD / this.ethPrice;
     },
     tweenedDonationAmountUSD() {
-      return this.tweenedNumber.toFixed(2);
+      const tweenedNumber = Number(this.tweenedNumber);
+      return tweenedNumber.toFixed(2);
     },
     totalDonationsUSD() {
       return (this.totalDonationsETH * this.ethPrice).toFixed(2);
