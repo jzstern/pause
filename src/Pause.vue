@@ -5,11 +5,6 @@ export default {
     Donate: () => import("./components/Donate"),
     Info: () => import("./components/Info"),
     MarqueeText: () => import("vue-marquee-text-component")
-  },
-  computed: {
-    isMobile() {
-      return false;
-    }
   }
 };
 </script>
@@ -21,31 +16,18 @@ export default {
       <Donate />
     </div>
 
-    <marquee-text v-if="!isMobile" class="marquee" :duration="13" :repeat="20">
+    <marquee-text class="marquee" :duration="13" :repeat="20">
       <v-html>
         BLACK LIVES MATTER
         <span v-html="'&nbsp;'"></span>■
         <span v-html="'&nbsp;'"></span>
       </v-html>
     </marquee-text>
-    <marquee-text v-if="!isMobile" class="marquee marquee-bottom" :duration="42" :repeat="10">
+    <marquee-text class="marquee marquee-bottom" :duration="42" :repeat="10">
       SUPPORT THE MOVEMENT
       <span v-html="'&nbsp;'"></span>■
       <span v-html="'&nbsp;'"></span> FUND THE MOVEMENT
       <span v-html="'&nbsp;'"></span>■
-      <span v-html="'&nbsp;'"></span>
-    </marquee-text>
-
-    <marquee-text v-if="isMobile" class="marquee" :duration="140">
-      BLACK LIVES MATTER
-      <span v-html="'&nbsp;'"></span>|
-      <span v-html="'&nbsp;'"></span>
-    </marquee-text>
-    <marquee-text v-if="isMobile" class="marquee marquee-bottom" :duration="140">
-      SUPPORT THE MOVEMENT
-      <span v-html="'&nbsp;'"></span>|
-      <span v-html="'&nbsp;'"></span> FUND THE MOVEMENT
-      <span v-html="'&nbsp;'"></span>|
       <span v-html="'&nbsp;'"></span>
     </marquee-text>
   </div>

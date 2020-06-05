@@ -29,9 +29,6 @@
         currency="USD"
         locale="en-US"
         placeholder="$0.00"
-        autocomplete="off"
-        autocorrect="off"
-        spellcheck="true"
         onfocus="this.placeholder = ''"
         onblur="this.placeholder = '$0.00'"
       />
@@ -237,6 +234,10 @@ h2 {
   font-size: 20px;
   width: 250px;
   color: white;
+
+  &:focus {
+    border: 1px solid #ffbe20;
+  }
 
   &::placeholder {
     color: darkgrey;
