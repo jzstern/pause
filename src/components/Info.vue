@@ -93,7 +93,6 @@ h2 {
   cursor: pointer;
 
   &:hover {
-    // width: 440px;
     color: #ffcb20;
     border: 1px solid #ffcb20;
     transition: 0.25s;
@@ -107,6 +106,16 @@ h2 {
 }
 
 @media (max-width: 1000px) {
+  .copy {
+    text-align: justify;
+    font-size: 15px;
+    margin: 5px 0px 5px 0px;
+  }
+
+  h2 {
+    margin: 5px 0px 5px 0px;
+  }
+
   .info-container {
     margin: auto;
   }

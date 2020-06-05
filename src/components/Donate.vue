@@ -168,18 +168,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@media (max-width: 1100px) {
-  .donate-container {
-    margin: 0 2vw;
-  }
-}
-
-@media (max-width: 1000px) {
-  .donate-container {
-    display: none;
-  }
-}
-
 :focus {
   outline: 0;
   opacity: 1;
@@ -301,5 +289,17 @@ svg {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+
+@media (max-width: 1100px) {
+  .donate-container {
+    margin: 0 2vw;
+  }
+}
+
+@media (max-width: 1000px) {
+  .donate-container {
+    display: none;
+  }
 }
 </style>

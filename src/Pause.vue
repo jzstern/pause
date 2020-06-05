@@ -120,16 +120,6 @@ export default {
     margin: auto;
   }
 
-  .copy {
-    text-align: justify;
-    font-size: 15px;
-    margin: 5px 0px 5px 0px;
-  }
-
-  h2 {
-    margin: 5px 0px 5px 0px;
-  }
-
   .marquee {
     font-size: 18px;
     margin: 5px 0;
