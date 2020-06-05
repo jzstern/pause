@@ -19,7 +19,7 @@
         class="us"
         href="https://twitter.com/loftradio_"
         target="_blank"
-      >here</a>&nbsp;at the end of the campaign.
+      >here</a>&nbsp;once Loft is back on air.
       <br />
     </p>
     <div class="donate-action">
@@ -84,9 +84,9 @@
 /*eslint-disable */
 import gsap from "gsap";
 import Web3 from "web3";
+const axios = require("axios");
 const CoinGecko = require("coingecko-api");
 const CoinGeckoClient = new CoinGecko();
-const axios = require("axios");
 
 export default {
   name: "Donate",
