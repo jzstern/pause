@@ -3,7 +3,7 @@
     <h2>donate using crypto</h2>
 
     <div class="donate-total-container">
-      <p class="donate-total">${{ totalDonationsUSD }}</p>
+      <p class="donate-total">${{ tweenedDonationAmountUSD }}</p>
       <p class="donate-total-label">total contributions</p>
     </div>
     <p class="copy">
@@ -82,7 +82,7 @@
 
 <script>
 /*eslint-disable */
-import DonateButton from "./DonateButton";
+import gsap from "gsap";
 import Web3 from "web3";
 const CoinGecko = require("coingecko-api");
 const CoinGeckoClient = new CoinGecko();
@@ -91,11 +91,19 @@ const axios = require("axios");
 export default {
   name: "Donate",
   components: {
-    DonateButton
+    DonateButton: () => import("./DonateButton")
+  },
+  watch: {
+    totalDonationsUSD: function(newValue) {
+      gsap.to(this.$data, { duration: 2, tweenedNumber: newValue });
+    }
   },
   computed: {
     amountETH() {
       return this.amountUSD / this.ethPrice;
+    },
+    tweenedDonationAmountUSD() {
+      return this.tweenedNumber.toFixed(2);
     },
     totalDonationsUSD() {
       return (this.totalDonationsETH * this.ethPrice).toFixed(2);
@@ -108,6 +116,7 @@ export default {
       ethPrice: null,
       isMobile: false,
       totalDonationsETH: 0,
+      tweenedNumber: 0,
       txState: null
     };
   },
@@ -184,28 +193,18 @@ h2 {
 
 .donate-total-container {
   text-align: left;
-  // border-top: 2px solid white;
-  // border-bottom: 2px solid rgba(255, 255, 255, 1);
-  // border-radius: 15px;
-  // padding: 0 0 15px 0;
   margin: 25px 0 15px 0;
-  // height: 175px;
 }
 
 .donate-total {
   margin: 0;
-  // position: relative;
-
-  // top: 50%;
-  // left: 50%;
-  // transform: translate(-50%, -70%);
   background: -webkit-linear-gradient(
     15deg,
     rgb(248, 194, 45) 9%,
     rgb(255, 73, 1) 75%
   );
-  -webkit-background-clip: text;
   background-clip: text;
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: anonymous;
   font-size: 100px;
@@ -258,7 +257,6 @@ h2 {
 
 .tx-state {
   margin-top: 15px;
-  // line-height: 50px;
   font-family: anonymous;
   font-size: 20px;
 }
@@ -290,12 +288,7 @@ svg {
   }
 }
 
-@media (max-width: 900px) {
-  .copy {
-    text-align: justify;
-    font-size: 15px;
-  }
-
+@media (max-width: 1000px) {
   .donate-container {
     display: none;
   }

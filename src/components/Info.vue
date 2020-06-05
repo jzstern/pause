@@ -1,0 +1,122 @@
+<template>
+  <div class="info-container">
+    <h2>loft is off the air</h2>
+    <p class="copy">
+      So much of the music and culture we surround ourselves with comes from or has roots
+      in the black community. We support and join those protesting systemic
+      racism and injustice across the United States and across the world.
+      <br />
+    </p>
+
+    <p class="copy">
+      Below are donation links to some organizations we've given to. We
+      encourage you to give if you're able. Peace to all.
+      <br />
+    </p>
+
+    <div class="link-container">
+      <a
+        class="link"
+        href="https://policingequity.org/donate"
+        target="_blank"
+      >Center for Policing Equity</a>
+
+      <a
+        class="link"
+        href="https://support.eji.org/give/153413/#!/donation/checkout"
+        target="_blank"
+      >Equal Justice Initiative</a>
+
+      <a class="link" href="https://action.aclu.org/give/now?redirect=donate" target="_blank">ACLU</a>
+
+      <a class="more" target="_blank" href="https://blacklivesmatters.carrd.co/">
+        More ways to help
+        <img class="link-out" src="../assets/LinkOut.svg" />
+      </a>
+    </div>
+  </div>
+</template>
+
+<style scoped lang="scss">
+@media (max-width: 1100px) {
+  .info-container {
+    margin: 0 2vw;
+  }
+}
+
+@media (max-width: 1000px) {
+  .info-container {
+    margin: auto;
+  }
+
+  .link {
+    width: 85vw;
+    max-width: 450px;
+    padding: 7px 0px;
+    color: #ffcb20;
+    border: 1px solid #ffcb20;
+  }
+}
+
+h2 {
+  font-variant: small-caps;
+}
+
+.more {
+  cursor: pointer;
+  display: inline;
+  text-align: center;
+  opacity: 0.5;
+  text-decoration: none;
+  color: white;
+
+  &:hover {
+    color: #ffcb20;
+    fill: #ffcb20;
+    opacity: 1;
+    transition: 0.25s;
+  }
+}
+
+.link-out {
+  width: 17px;
+  padding-left: 5px;
+  vertical-align: middle;
+  transform: translateY(-1px);
+}
+
+.info-container {
+  width: 450px;
+  margin: 0 5vw;
+}
+
+.copy {
+  text-align: justify;
+}
+
+.link-container {
+  margin: 25px 0px;
+}
+
+.link {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  margin: auto;
+  width: 450px;
+  box-sizing: border-box;
+  border: 1px solid white;
+  border-radius: 4px;
+  padding: 10px 0px;
+  margin-bottom: 15px;
+  cursor: pointer;
+
+  &:hover {
+    // width: 440px;
+    color: #ffcb20;
+    border: 1px solid #ffcb20;
+    transition: 0.25s;
+  }
+}
+</style>

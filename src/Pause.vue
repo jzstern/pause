@@ -1,12 +1,13 @@
 <script>
-import Donate from "./components/Donate";
-import MarqueeText from "vue-marquee-text-component";
+// import Donate from "./components/Donate";
+// import MarqueeText from "vue-marquee-text-component";
 
 export default {
   name: "Pause",
   components: {
-    Donate,
-    MarqueeText
+    Donate: () => import("./components/Donate"),
+    Info: () => import("./components/Info"),
+    MarqueeText: () => import("vue-marquee-text-component")
   },
   computed: {
     isMobile() {
@@ -19,47 +20,7 @@ export default {
 <template>
   <div class="pause">
     <div class="content">
-      <div class="info-container">
-        <h2>loft is off the air</h2>
-        <p class="copy">
-          So much of the music and culture we surround ourselves with comes from or has roots
-          in the black community. We support and join those protesting systemic
-          racism and injustice across the United States and across the world.
-          <br />
-        </p>
-
-        <p class="copy">
-          Below are donation links to some organizations we've given to. We
-          encourage you to give if you're able. Peace to all.
-          <br />
-        </p>
-        <div class="link-container">
-          <a
-            class="link"
-            href="https://policingequity.org/donate"
-            target="_blank"
-          >Center for Policing Equity</a>
-
-          <a
-            class="link"
-            href="https://support.eji.org/give/153413/#!/donation/checkout"
-            target="_blank"
-          >Equal Justice Initiative</a>
-
-          <!-- <a class="link" href="https://www.cuapb.org/t" target="_blank">CUAPB</a> -->
-
-          <a
-            class="link"
-            href="https://action.aclu.org/give/now?redirect=donate"
-            target="_blank"
-          >ACLU</a>
-
-          <a class="more" target="_blank" href="https://blacklivesmatters.carrd.co/">
-            More ways to help
-            <img class="link-out" src="./assets/LinkOut.svg" />
-          </a>
-        </div>
-      </div>
+      <Info />
       <Donate />
     </div>
 
@@ -67,31 +28,30 @@ export default {
       BLACK LIVES MATTER ■ BLACK LIVES MATTER ■ BLACK LIVES MATTER ■ BLACK LIVES
       MATTER ■ BLACK LIVES MATTER ■ BLACK LIVES MATTER ■ BLACK LIVES MATTER ■
       BLACK LIVES MATTER ■ BLACK LIVES MATTER ■ BLACK LIVES MATTER ■ BLACK LIVES
-      MATTER ■ BLACK LIVES MATTER ■
+      MATTER ■ BLACK LIVES MATTER ■&nbsp;
     </marquee-text>
     <marquee-text v-if="!isMobile" class="marquee marquee-bottom" :duration="260">
       SUPPORT THE MOVEMENT ■ FUND THE MOVEMENT ■ SUPPORT THE MOVEMENT ■
       FUND THE MOVEMENT ■ SUPPORT THE MOVEMENT ■ FUND THE MOVEMENT ■
       SUPPORT THE MOVEMENT ■ FUND THE MOVEMENT ■ SUPPORT THE MOVEMENT ■
-      FUND THE MOVEMENT ■ SUPPORT THE MOVEMENT ■ FUND THE MOVEMENT ■
+      FUND THE MOVEMENT ■ SUPPORT THE MOVEMENT ■ FUND THE MOVEMENT ■&nbsp;
     </marquee-text>
 
     <marquee-text
       v-if="isMobile"
       class="marquee"
       :duration="60"
-    >BLACK LIVES MATTER | BLACK LIVES MATTER | BLACK LIVES MATTER |</marquee-text>
+    >BLACK LIVES MATTER | BLACK LIVES MATTER | BLACK LIVES MATTER |&nbsp;</marquee-text>
     <marquee-text
       v-if="isMobile"
       class="marquee marquee-bottom"
       :duration="50"
-    >SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT |</marquee-text>
+    >SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT | SUPPORT THE MOVEMENT |&nbsp;</marquee-text>
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import url("https://use.typekit.net/ijc3kul.css");
-// @import "../styles/global.scss";
 
 @font-face {
   font-family: "monument";
@@ -101,22 +61,6 @@ export default {
 @font-face {
   font-family: "anonymous";
   src: url("./assets/AnonymousPro-Regular.ttf");
-}
-
-h2 {
-  font-variant: small-caps;
-}
-
-.pause {
-  position: fixed;
-  z-index: 100000;
-  background: rgb(16, 16, 16);
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  color: white;
-  overflow: hidden;
 }
 
 .content {
@@ -133,41 +77,6 @@ h2 {
   font-weight: 300;
 }
 
-.info-container {
-  width: 450px;
-  margin: 0 5vw;
-}
-
-.copy {
-  text-align: justify;
-}
-
-.link-container {
-  margin: 25px 0px;
-}
-
-.link {
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-  color: white;
-  margin: auto;
-  width: 450px;
-  box-sizing: border-box;
-  border: 1px solid white;
-  border-radius: 4px;
-  padding: 10px 0px;
-  margin-bottom: 15px;
-  cursor: pointer;
-
-  &:hover {
-    // width: 440px;
-    color: #ffcb20;
-    border: 1px solid #ffcb20;
-    transition: 0.25s;
-  }
-}
-
 .marquee {
   opacity: 0.8;
   color: white;
@@ -175,6 +84,7 @@ h2 {
   font-family: monument;
   font-size: 24px;
   margin: 20px 0px;
+  white-space: pre-line;
 
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
@@ -187,44 +97,22 @@ h2 {
   bottom: 0;
 }
 
-.more {
-  display: inline;
-  text-align: center;
-  opacity: 0.5;
-  cursor: pointer;
-  text-decoration: none;
+.pause {
+  position: fixed;
+  z-index: 100000;
+  background: rgb(16, 16, 16);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   color: white;
-
-  &:hover {
-    // width: 440px;
-    color: #ffcb20;
-    fill: #ffcb20;
-    opacity: 1;
-    transition: 0.25s;
-  }
+  overflow: hidden;
 }
 
-.link-out {
-  width: 17px;
-  padding-left: 5px;
-  vertical-align: middle;
-  transform: translateY(-1px);
-}
-
-@media (max-width: 1100px) {
-  .info-container {
-    margin: 0 2vw;
-  }
-}
-
-@media (max-width: 900px) {
-  h2 {
-    margin: 5px 0px 5px 0px;
-  }
-
+@media (max-width: 1000px) {
   .content {
     top: 50%;
-    width: 85vw;
+    // width: 85vw;
     transform: translate(-50%, -50%);
     margin: auto;
   }
@@ -235,12 +123,8 @@ h2 {
     margin: 5px 0px 5px 0px;
   }
 
-  .donate-container {
-    display: none;
-  }
-
-  .info-container {
-    margin: auto;
+  h2 {
+    margin: 5px 0px 5px 0px;
   }
 
   .link {
@@ -250,6 +134,7 @@ h2 {
     color: #ffcb20;
     border: 1px solid #ffcb20;
   }
+
   .marquee {
     font-size: 18px;
     margin: 5px 0;
