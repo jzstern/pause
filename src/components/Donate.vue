@@ -102,7 +102,7 @@ export default {
     },
     totalDonationsUSD() {
       return (
-        1515.0 + Number((this.totalDonationsETH * this.ethPrice).toFixed(2))
+        1515.05 + Number((this.totalDonationsETH * this.ethPrice).toFixed(2))
       );
     }
   },
