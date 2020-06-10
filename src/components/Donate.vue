@@ -7,7 +7,7 @@
       <p class="donate-total-label">total contributions</p>
     </div>
     <p class="copy">
-      We currently accept donations in ETH. Donations are sent to our wallet and will be split equally between
+      We accept donations in ETH. Donations are sent to our wallet and will be split equally between
       the Center for Policing Equity, Equal Justice Initiative, and the ACLU. We are
       <a
         class="us"
