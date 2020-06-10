@@ -15,7 +15,11 @@
         target="_blank"
       >real</a>&nbsp;
       <a class="us" href="https://twitter.com/jzstern" target="_blank">people</a> and
-      <a class="us" href="https://twitter.com/loftradio_" target="_blank">receipts</a>&nbsp; are updated monthly.
+      <a
+        class="us"
+        href="https://twitter.com/loftradio_/status/1270742266433290250?s=20"
+        target="_blank"
+      >receipts</a>&nbsp; will be updated monthly.
       <br />
     </p>
     <div class="donate-action">
