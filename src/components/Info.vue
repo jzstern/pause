@@ -1,10 +1,8 @@
 <template>
   <div class="info-container">
-    <h2>loft is off the air</h2>
+    <h2>the system is broken</h2>
     <p class="copy">
-      So much of the music and culture we surround ourselves with comes from or has roots
-      in the black community. We support and join those protesting systemic
-      racism and injustice across the United States and across the world.
+      We support and join those protesting systemic racism and injustice across the US and across the world. So much of the music we surround ourselves with comes from or has roots in black culture. Loft would not exist without the black community.
       <br />
     </p>
 
