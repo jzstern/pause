@@ -14,12 +14,8 @@
         href="https://twitter.com/michael_mckain"
         target="_blank"
       >real</a>&nbsp;
-      <a class="us" href="https://twitter.com/jzstern" target="_blank">people</a> and receipts will be posted
-      <a
-        class="us"
-        href="https://twitter.com/loftradio_"
-        target="_blank"
-      >here</a>&nbsp;once Loft is back on air.
+      <a class="us" href="https://twitter.com/jzstern" target="_blank">people</a> and
+      <a class="us" href="https://twitter.com/loftradio_" target="_blank">receipts</a>&nbsp; are updated monthly.
       <br />
     </p>
     <div class="donate-action">
@@ -105,8 +101,9 @@ export default {
       return tweenedNumber.toFixed(2);
     },
     totalDonationsUSD() {
-      return 1515;
-      // return Number((this.totalDonationsETH * this.ethPrice).toFixed(2)) + 1515;
+      return (
+        1515.0 + Number((this.totalDonationsETH * this.ethPrice).toFixed(2))
+      );
     }
   },
   data() {
@@ -236,6 +233,11 @@ h2 {
   font-size: 20px;
   width: 250px;
   color: white;
+
+  &:hover {
+    border: 1px solid white;
+    transition: all 0.2s ease;
+  }
 
   &:focus {
     border: 1px solid #ffbe20;
