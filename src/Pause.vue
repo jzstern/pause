@@ -4,6 +4,7 @@ export default {
   components: {
     Donate: () => import("./components/Donate"),
     Info: () => import("./components/Info"),
+    LoftRadioButton: () => import("./components/LoftRadioButton"),
     MarqueeText: () => import("vue-marquee-text-component")
   }
 };
@@ -15,6 +16,8 @@ export default {
       <Info id="info" />
       <Donate />
     </div>
+
+    <LoftRadioButton />
 
     <marquee-text class="marquee" :duration="13" :repeat="20">
       BLACK LIVES MATTER
@@ -111,6 +114,12 @@ export default {
 @media (max-width: 1000px) {
   .content {
     width: 85vw;
+  }
+}
+
+@media (max-width: 650px) {
+  .marquee-bottom {
+    display: none;
   }
 }
 </style>

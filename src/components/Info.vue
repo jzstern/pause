@@ -126,4 +126,10 @@ h2 {
     border: 1px solid #ffcb20;
   }
 }
+
+@media (max-width: 650px) {
+  .more {
+    display: none;
+  }
+}
 </style>
