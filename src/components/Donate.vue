@@ -105,7 +105,7 @@ export default {
       return tweenedNumber.toFixed(2);
     },
     totalDonationsUSD() {
-      return (this.totalDonationsETH * this.ethPrice).toFixed(2);
+      return 1515 + Number((this.totalDonationsETH * this.ethPrice).toFixed(2));
     }
   },
   data() {
