@@ -31,7 +31,7 @@
         placeholder="$0.00"
         onfocus="this.placeholder = ''"
         onblur="this.placeholder = '$0.00'"
-        distraction-free="{hideCurrencySymbol: false}"
+        :distraction-free="{ hideCurrencySymbol: false }"
       />
 
       <DonateButton :amount="amountETH" @txSent="handleTxSent" @txState="updateTxState" />
@@ -105,7 +105,8 @@ export default {
       return tweenedNumber.toFixed(2);
     },
     totalDonationsUSD() {
-      return 1515 + Number((this.totalDonationsETH * this.ethPrice).toFixed(2));
+      return 1515;
+      // return Number((this.totalDonationsETH * this.ethPrice).toFixed(2)) + 1515;
     }
   },
   data() {

@@ -17,11 +17,9 @@ export default {
     </div>
 
     <marquee-text class="marquee" :duration="13" :repeat="20">
-      <v-html>
-        BLACK LIVES MATTER
-        <span v-html="'&nbsp;'"></span>■
-        <span v-html="'&nbsp;'"></span>
-      </v-html>
+      BLACK LIVES MATTER
+      <span v-html="'&nbsp;'"></span>■
+      <span v-html="'&nbsp;'"></span>
     </marquee-text>
     <marquee-text class="marquee marquee-bottom" :duration="42" :repeat="10">
       SUPPORT THE MOVEMENT
