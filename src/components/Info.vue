@@ -47,12 +47,12 @@ h2 {
   opacity: 0.5;
   text-decoration: none;
   color: white;
+  transition: 0.25s;
 
   &:hover {
     color: #ffcb20;
     fill: #ffcb20;
     opacity: 1;
-    transition: 0.25s;
   }
 }
 
