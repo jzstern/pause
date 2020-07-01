@@ -89,11 +89,11 @@ h2 {
   padding: 10px 0px;
   margin-bottom: 15px;
   cursor: pointer;
+  transition: 0.25s;
 
   &:hover {
     color: #ffcb20;
     border: 1px solid #ffcb20;
-    transition: 0.25s;
   }
 }
 

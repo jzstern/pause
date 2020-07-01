@@ -106,7 +106,7 @@ export default {
     },
     totalDonationsUSD() {
       return (
-        1515.05 + Number((this.totalDonationsETH * this.ethPrice).toFixed(2))
+        1539.45 + Number((this.totalDonationsETH * this.ethPrice).toFixed(2))
       );
     }
   },
@@ -237,10 +237,10 @@ h2 {
   font-size: 20px;
   width: 250px;
   color: white;
+  transition: all 0.2s ease;
 
   &:hover {
     border: 1px solid white;
-    transition: all 0.2s ease;
   }
 
   &:focus {
